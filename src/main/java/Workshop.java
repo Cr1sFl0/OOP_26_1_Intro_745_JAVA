@@ -134,12 +134,13 @@ public class Workshop {
     }
 
     public int contarCaracteres(String cadena) {
-        return (cadena == null) ? 0 : cadena.length();
+    if (cadena == null) return 0;
+    return cadena.length();
     }
 
     public String invertirCadena(String cadena) {
-        if (cadena == null) return null;
-        return new StringBuilder(cadena).reverse().toString();
+    if (cadena == null) return null;
+    return new StringBuilder(cadena).reverse().toString();
     }
 
     public boolean esPalindromo(String cadena) {
@@ -150,8 +151,8 @@ public class Workshop {
     }
 
     public int contarPalabras(String cadena) {
-        if (cadena == null || cadena.trim().isEmpty()) return 0;
-        return cadena.trim().split("\\s+").length;
+    if (cadena == null || cadena.trim().isEmpty()) return 0;
+    return cadena.trim().split("\\s+").length;
     }
 
     public String convertirAMayusculas(String cadena) {
@@ -183,11 +184,13 @@ public class Workshop {
     }
 
     public String convertirABinario(int numero) {
-        return Integer.toBinaryString(numero);
+    if (numero < 0) return "-" + Integer.toBinaryString(-numero);
+    return Integer.toBinaryString(numero);
     }
 
     public String convertirAHexadecimal(int numero) {
-        return Integer.toHexString(numero).toUpperCase();
+    if (numero < 0) return "-" + Integer.toHexString(-numero).toUpperCase();
+    return Integer.toHexString(numero).toUpperCase();
     }
 
     private String letraAJugada(String entrada) {
@@ -227,7 +230,7 @@ public class Workshop {
     }
 
     public double areaCirculo(double radio) {
-        return Math.PI * Math.pow(radio, 2);
+    return Math.PI * Math.pow(radio, 2); // Ahora sí es Pi * Radio^2
     }
 
     public String zoodiac(int day, int month) {
