@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Workshop {
 
@@ -32,7 +31,6 @@ public class Workshop {
         if (numero <= 1) return false;
         if (numero == 2) return true;
         if (numero % 2 == 0) return false;
-        // Optimización: hasta la raíz cuadrada
         for (int i = 3; i <= Math.sqrt(numero); i += 2) {
             if (numero % i == 0) return false;
         }
@@ -134,13 +132,13 @@ public class Workshop {
     }
 
     public int contarCaracteres(String cadena) {
-    if (cadena == null) return 0;
-    return cadena.length();
+        if (cadena == null) return 0;
+        return cadena.length();
     }
 
     public String invertirCadena(String cadena) {
-    if (cadena == null) return null;
-    return new StringBuilder(cadena).reverse().toString();
+        if (cadena == null) return null;
+        return new StringBuilder(cadena).reverse().toString();
     }
 
     public boolean esPalindromo(String cadena) {
@@ -151,8 +149,8 @@ public class Workshop {
     }
 
     public int contarPalabras(String cadena) {
-    if (cadena == null || cadena.trim().isEmpty()) return 0;
-    return cadena.trim().split("\\s+").length;
+        if (cadena == null || cadena.trim().isEmpty()) return 0;
+        return cadena.trim().split("\\s+").length;
     }
 
     public String convertirAMayusculas(String cadena) {
@@ -164,10 +162,12 @@ public class Workshop {
     }
 
     public String reemplazarSubcadena(String cadena, String vieja, String nueva) {
+        if (cadena == null) return null;
         return cadena.replace(vieja, nueva);
     }
 
     public int buscarSubcadena(String cadena, String subcadena) {
+        if (cadena == null) return -1;
         return cadena.indexOf(subcadena);
     }
 
@@ -184,13 +184,11 @@ public class Workshop {
     }
 
     public String convertirABinario(int numero) {
-    if (numero < 0) return "-" + Integer.toBinaryString(-numero);
-    return Integer.toBinaryString(numero);
+        return Integer.toBinaryString(numero);
     }
 
     public String convertirAHexadecimal(int numero) {
-    if (numero < 0) return "-" + Integer.toHexString(-numero).toUpperCase();
-    return Integer.toHexString(numero).toUpperCase();
+        return Integer.toHexString(numero).toUpperCase();
     }
 
     private String letraAJugada(String entrada) {
@@ -215,15 +213,15 @@ public class Workshop {
     }
 
     public boolean jugarPiedraPapelTijeraLagartoSpock(String eleccion1, String eleccion2) {
-    if (eleccion1 == null || eleccion2 == null) return false;
-    String jug1 = letraAJugada(eleccion1);
-    String jug2 = letraAJugada(eleccion2);
-    
-    if (jug1.equals(jug2)) return true; // El test espera true en caso de empate
-    return gana(jug1, jug2);
+        if (eleccion1 == null || eleccion2 == null) return false;
+        String jug1 = letraAJugada(eleccion1);
+        String jug2 = letraAJugada(eleccion2);
+        if (jug1.equals(jug2)) return true; 
+        return gana(jug1, jug2);
     }
 
     public String pptls2(String[] game) {
+        if (game == null || game.length < 2) return "Empate";
         String jug1 = letraAJugada(game[0]);
         String jug2 = letraAJugada(game[1]);
         if (jug1.equals(jug2)) return "Empate";
@@ -231,7 +229,7 @@ public class Workshop {
     }
 
     public double areaCirculo(double radio) {
-    return Math.PI * Math.pow(radio, 2); // Ahora sí es Pi * Radio^2
+        return Math.PI * Math.pow(radio, 2);
     }
 
     public String zoodiac(int day, int month) {
