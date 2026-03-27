@@ -1,23 +1,20 @@
-name: Java CI  # Nombre del flujo
+name: Java CI con Maven
 
-on: [push]    # Se activa cada vez que subes algo (push)
+on: [push]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # Usa una computadora con Linux en la nube
+  build-and-test:
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4  # Descarga tu código
+      - uses: actions/checkout@v4
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
+          cache: maven
 
-      - name: Compile Java
-        run: |
-          # IMPORTANTE: Aquí debemos entrar a la carpeta donde está tu Workshop.java
-          # Según tu imagen, la ruta parece ser:
-          cd src/main/java
-          javac Workshop.java
+      - name: Build and Run Tests
+        run: mvn test
