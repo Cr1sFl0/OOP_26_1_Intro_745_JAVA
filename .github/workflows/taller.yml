@@ -1,15 +1,28 @@
 name: Autograding Taller
+
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Ejecutar Pruebas
-        run: mvn clean test
+
+      - name: Build and Test with Maven
+        run: mvn test
+
+      # ESTE ES EL PASO QUE CREA LA TABLA BONITA
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: always() # Para que salga aunque algún test falle
+        with:
+          report_paths: '**/target/surefire-reports/TEST-*.xml'
+          annotate_only: false
+          detailed_summary: true
