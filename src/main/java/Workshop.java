@@ -214,12 +214,13 @@ public class Workshop {
                (a.equals("spock") && (b.equals("piedra") || b.equals("tijera")));
     }
 
-    public String jugarPiedraPapelTijeraLagartoSpock(String eleccion) {
-        String[] jugadas = {"piedra", "papel", "tijera", "lagarto", "spock"};
-        String maquina = jugadas[new Random().nextInt(jugadas.length)];
-        String e = letraAJugada(eleccion);
-        if (e.equals(maquina)) return "Empate";
-        return gana(e, maquina) ? "Ganaste" : "Perdiste";
+    public boolean jugarPiedraPapelTijeraLagartoSpock(String eleccion1, String eleccion2) {
+    if (eleccion1 == null || eleccion2 == null) return false;
+    String jug1 = letraAJugada(eleccion1);
+    String jug2 = letraAJugada(eleccion2);
+    
+    if (jug1.equals(jug2)) return true; // El test espera true en caso de empate
+    return gana(jug1, jug2);
     }
 
     public String pptls2(String[] game) {
