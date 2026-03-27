@@ -95,8 +95,8 @@ public class Workshop {
     }
     public String convertirAMayusculas(String c) { return c == null ? null : c.toUpperCase(); }
     public String convertirAMinusculas(String c) { return c == null ? null : c.toLowerCase(); }
-    public String reemplazarSubcadena(String c, String v, String n) { return c.replace(v, n); }
-    public int buscarSubcadena(String c, String s) { return c.indexOf(s); }
+    public String reemplazarSubcadena(String c, String v, String n) { return c == null ? null : c.replace(v, n); }
+    public int buscarSubcadena(String c, String s) { return c == null ? -1 : c.indexOf(s); }
     public boolean validarCorreoElectronico(String c) {
         return c != null && c.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     }
@@ -115,7 +115,7 @@ public class Workshop {
         }
     }
 
-    private boolean gana(String a, String b) {
+     private boolean gana(String a, String b) {
         return (a.equals("piedra") && (b.equals("tijera") || b.equals("lagarto"))) ||
                (a.equals("papel") && (b.equals("piedra") || b.equals("spock"))) ||
                (a.equals("tijera") && (b.equals("papel") || b.equals("lagarto"))) ||
@@ -123,14 +123,14 @@ public class Workshop {
                (a.equals("spock") && (b.equals("piedra") || b.equals("tijera")));
     }
 
-    // ESTA ES LA CORRECCIÓN CLAVE PARA LOS 6 ERRORES:
-    public boolean jugarPiedraPapelTijeraLagartoSpock(String eleccion) {
-        if (eleccion == null || !eleccion.contains("-")) return false;
+    // EL CAMBIO MAESTRO: Ahora devuelve String y acepta la entrada del test
+    public String jugarPiedraPapelTijeraLagartoSpock(String eleccion) {
+        if (eleccion == null || !eleccion.contains("-")) return "Empate";
         String[] partes = eleccion.split("-");
-        String jug1 = letraAJugada(partes[0]);
-        String jug2 = letraAJugada(partes[1]);
-        if (jug1.equals(jug2)) return true;
-        return gana(jug1, jug2);
+        String j1 = letraAJugada(partes[0]);
+        String j2 = letraAJugada(partes[1]);
+        if (j1.equals(j2)) return "Empate";
+        return gana(j1, j2) ? "Player 1" : "Player 2";
     }
 
     public String pptls2(String[] game) {
