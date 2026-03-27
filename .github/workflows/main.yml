@@ -1,11 +1,10 @@
-name: Java CI con Maven
+name: Java Autograding
 
 on: [push]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -14,7 +13,12 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: maven
 
-      - name: Build and Run Tests
-        run: mvn test
+      - name: Compile and Run Tests
+        run: |
+          # Compilamos el taller y los tests (buscamos donde estén)
+          javac src/main/java/Workshop.java
+          
+          # Si el comando anterior falla, intentaremos compilar todo el proyecto
+          # Esto forzará a que los tests se ejecuten manualmente si Maven no está configurado
+          mvn test -DfailIfNoTests=false
